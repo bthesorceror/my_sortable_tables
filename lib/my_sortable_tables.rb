@@ -42,7 +42,10 @@ module MySortableTables
       def sort_direction
         %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
       end
-
+      
+      def sort_by
+        "#{sort_column} #{sort_direction}"
+      end
     end
 
   end
