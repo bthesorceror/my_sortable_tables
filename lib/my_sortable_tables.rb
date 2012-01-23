@@ -9,18 +9,21 @@ module MySortableTables
       base.extend(ClassMethods)
       base.class_eval do
         helper_method :sort_column, :sort_direction
+        class << self
+          attr_accessor :sort_columns
+        end
       end
     end
 
     module ClassMethods
       def sortable_columns(*columns)
-        @@sortable_columns = columns
+        self.sort_columns = columns
       end
     end
 
     module InstanceMethods
       def sort_column
-        @@sortable_columns.include?(params[:sort]) ? params[:sort] : @@sortable_columns.first if @@sortable_columns
+        self.class.sort_columns.include?(params[:sort]) ? params[:sort] : self.class.sort_columns.first if self.class.sort_columns
       end
 
       def sort_direction
