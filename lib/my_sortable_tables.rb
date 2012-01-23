@@ -8,7 +8,7 @@ module MySortableTables
       base.send(:include, InstanceMethods)
       base.extend(ClassMethods)
       base.class_eval do
-        helper_method :sort_column, :sort_direction
+        helper_method :sort_column, :sort_direction, :sortable
         class << self
           attr_accessor :sort_columns
         end
@@ -29,6 +29,17 @@ module MySortableTables
       def sort_direction
         %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
       end
+
+      def sortable(column, title = nil)
+        title ||= column.titleize
+        new_params = {}
+        css_class = column == sort_column ? "current_column #{sort_direction}" : nil
+        new_params[:direction] = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+        new_params[:sort] = column
+        new_params[:search] = params[:search] if params[:search] && !params[:search].empty?
+        link_to title, new_params, {:class => css_class}
+      end
+
     end
 
   end
