@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Brandon Farmer"]
   s.email       = ["thepooreskimojoe@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Adds sorting to controllers}
+  s.description = %q{Adds sorting to controllers}
 
   s.rubyforge_project = "my_sortable_tables"
 
